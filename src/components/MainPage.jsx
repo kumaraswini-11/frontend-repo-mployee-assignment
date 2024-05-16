@@ -23,10 +23,11 @@ const MainPage = () => {
             <span className="font-medium"> 1250 </span> data
           </p>
         </div>
-        <div>
-          <button className="rounded-md px-4 py-2 text-black ">1</button>
-          <button className="rounded-md px-4 py-2 text-black ">2</button>
-          <button className="rounded-md px-4 py-2 text-black ">8</button>
+        <div className="flex items-center justify-center gap-1">
+          <button class="rounded-md bg-black px-2 text-white">1</button>
+          <button class="rounded-md  bg-slate-300 px-2 text-black">2</button>
+          <p class="text-sm font-normal text-gray-500">...</p>
+          <button class="rounded-md bg-slate-300 px-2 text-black">8</button>
         </div>
       </div>
     </div>
@@ -75,8 +76,8 @@ const JobCard = () => {
             </span>
           </div>
         </div>
-        <div className="mt-4 text-slate-500">
-          <ul>
+        <div className="ml-5 mt-4 text-slate-500">
+          <ul class="list-disc">
             <li>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt
