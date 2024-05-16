@@ -1,25 +1,24 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import LogoIcon from "../../public/logo.svg";
-import Profile from "../../public/profile.png";
+import LogoIcon from "../../public/images/logo.svg";
+import Profile from "../../public/images/profile.png";
 
 const Navbar = () => {
   return (
-    <nav className="flex h-14 items-center justify-between gap-4 border-b bg-white px-4 shadow-sm">
-      <div className="hidden items-center gap-x-4 transition-all duration-300 lg:flex">
+    <nav className="fixed left-0 right-0 top-0  z-50 flex h-14 w-full items-center justify-between bg-white px-4 shadow-sm">
+      <div className="hidden items-center gap-x-4 md:flex">
         <Link to="/">
           <img src={LogoIcon} alt="Logo" className="h-10" />
         </Link>
       </div>
       <div className="ml-auto flex items-center gap-x-4">
-        <ul className="flex space-x-5">
+        <ul className="flex w-full space-x-5">
           {navItems.map((item, index) => (
             <li key={index}>
               <NavLink
                 to={item.path}
                 className="text-sm transition-all duration-300 hover:opacity-75"
-                // activeClassName="text-orange-500 font-bold"
               >
                 {item.label}
                 {item.tag && (
@@ -38,7 +37,7 @@ const Navbar = () => {
               alt="Profile Picture"
               className="h-8 w-8 rounded-xl"
             />
-            <span>Divyanshus</span>
+            <span className="hidden md:inline-block">Divyanshus</span>
             <MdKeyboardArrowDown />
           </div>
         </div>
@@ -54,5 +53,4 @@ const navItems = [
   { path: "#", label: "Career Blogs" },
   { path: "#", label: "About Us" },
 ];
-
 export default Navbar;

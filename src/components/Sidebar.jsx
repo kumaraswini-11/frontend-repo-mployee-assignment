@@ -7,14 +7,13 @@ import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { TbUsersGroup } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
 import { TbHelpSquare } from "react-icons/tb";
-import UpgradeLogo from "../../public/upgradeLogo.svg";
+import UpgradeLogo from "../../public/images/upgradeLogo.svg";
 import { GoDotFill } from "react-icons/go";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 const NavItem = ({ icon, label, subMenus }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(subMenus && subMenus.length > 0);
   const toggleSubMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -23,23 +22,29 @@ const NavItem = ({ icon, label, subMenus }) => {
     <>
       <div aria-label={label} onClick={subMenus && toggleSubMenu}>
         <Link
-          className={`mb-1 flex items-center gap-x-2.5 rounded-md p-2 ${label.toLowerCase().includes("saved jobs") ? "bg-[#23283B] text-white" : "text-black"}`}
+          to={subMenus ? "#" : "/"}
+          className={`flex items-center gap-x-2.5 rounded-md p-2 ${
+            label.toLowerCase().includes("saved jobs")
+              ? "mb-1 bg-[#23283B] text-white"
+              : "text-black"
+          } cursor-pointer`}
         >
           <span className="relative mt-1 h-5 w-5">{icon}</span>
-          <span className="flex-1  text-sm font-medium ">{label}</span>
+          <span className="flex-1 text-sm font-medium">{label}</span>
           {subMenus && (
-            <span className=" text-white">
+            <span className="text-white">
               {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
             </span>
           )}
         </Link>
       </div>
-      {isOpen && (
+      {isOpen && subMenus && (
         <div className="">
           {subMenus.map((submenu, index) => (
             <Link
               key={index}
-              className="group flex w-full items-center gap-x-2.5 p-2  text-gray-600 transition-colors duration-200 ease-in-out hover:rounded-lg hover:border-[1px] hover:border-gray-500 hover:shadow-sm group-hover:text-orange-500"
+              to={submenu.path}
+              className="group mb-1 flex w-full cursor-pointer items-center gap-x-2.5 p-2 text-gray-600 transition-colors duration-200 ease-in-out hover:rounded-lg hover:border-[1px] hover:border-gray-500 hover:shadow-sm group-hover:text-orange-500"
               aria-label={submenu.label}
             >
               <span className="relative mt-1 h-5 w-5 ">{submenu.icon}</span>
@@ -60,8 +65,8 @@ const HelpSupportItem = ({ icon, label }) => {
 
 const Sidebar = () => {
   return (
-    <aside className="font-inter h-screen w-64 shadow-md">
-      <div className="flex h-full flex-col gap-y-[11rem] px-3 ">
+    <aside className="fixed bottom-0 left-0 top-14 z-50 w-64 bg-white shadow-md">
+      <div className="flex h-full flex-col justify-between px-3">
         <nav className="mt-3 h-auto">
           {navItemsArray.map(({ icon, label, subMenus }) => (
             <NavItem
@@ -75,7 +80,7 @@ const Sidebar = () => {
 
         <div className="mb-2">
           <div className="mb-6">
-            <label className="mb-2 text-gray-500">Help & Support</label>
+            <label className="mb-1 p-2 text-gray-500">Help & Support</label>
             {helpSupportSectionArray.map(({ icon, label }) => (
               <HelpSupportItem key={label} icon={icon} label={label} />
             ))}
